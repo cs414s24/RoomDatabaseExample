@@ -10,13 +10,13 @@ import androidx.room.*
 interface ContactDAO {
 
     // OnConflictStrategy is optional, but good idea to specify
+    @Insert(onConflict = OnConflictStrategy.REPLACE)
+    fun insertContact(contact: ContactEntity)
+
+
+    // Enable this version if you want to use Coroutine version instead of Thread (alternative to the method above)
 /*    @Insert(onConflict = OnConflictStrategy.REPLACE)
     fun insertContact(contact: ContactEntity)*/
-
-
-    // Enable this version if you want to use Coroutine version instead of Thread
-    @Insert(onConflict = OnConflictStrategy.REPLACE)
-    suspend fun insertContact(contact: ContactEntity)
 
     // Updates the contact
     @Update

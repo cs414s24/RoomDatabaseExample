@@ -41,7 +41,6 @@ class MainActivity : AppCompatActivity() {
             ContactRoomDatabase::class.java, "contacts.db"
         ).build()
 
-
         // Insert a contact for testing purpose -- this version uses a coroutine
         // GlobalScope is used for coroutines that should continue executing even after
         // the activity/fragment on which they are running is destroyed
@@ -74,7 +73,7 @@ class MainActivity : AppCompatActivity() {
     /**
      * Inserts a new contact in the database
      */
-/*    fun addButton(view: View) {
+    fun addButton(view: View) {
 
         // Insert a record (by using a Thread)
 
@@ -92,18 +91,19 @@ class MainActivity : AppCompatActivity() {
             val contact  = ContactEntity(0, name, email)
             Log.d(TAG, "Inserting a contact...")
             db.contactDAO().insertContact(contact)
-            clearEditTexts()
+
 
             // We cannot call showDialog from a non-UI thread, instead we can call it from a runOnUiThread to access our views
             runOnUiThread {
                 // Do your UI operations
                 showToast("Successfully added a record")
+                clearEditTexts()
             }
 
         }.start()
 
 
-    }*/
+    }
 
 
 
@@ -113,7 +113,7 @@ class MainActivity : AppCompatActivity() {
         take much time to run or consume too much resources
      */
 
-    fun addButton(view: View) {
+/*    fun addButton(view: View) {
         // Insert a record (by using a Coroutine)
         val name = nameText.text.toString()
         val email = emailText.text.toString()
@@ -132,7 +132,7 @@ class MainActivity : AppCompatActivity() {
             clearEditTexts()
             showToast("Successfully added a record")
         }
-     }
+     }*/
 
 
 
@@ -188,12 +188,11 @@ class MainActivity : AppCompatActivity() {
             // Delete the contact
             db.contactDAO().deleteContact(contact)
 
-            clearEditTexts()
-
             // We cannot call showDialog from a non-UI thread, instead we can call it from a runOnUiThread to access our views
             runOnUiThread {
                 // Do your UI operations
                 showToast("Record has been deleted.")
+                clearEditTexts()
             }
 
         }.start()
@@ -222,12 +221,11 @@ class MainActivity : AppCompatActivity() {
 
             db.contactDAO().updateContact(contact)
 
-            clearEditTexts()
-
             // We cannot call showDialog from a non-UI thread, instead we can call it from a runOnUiThread to access our views
             runOnUiThread {
                 // Do your UI operations
                 showToast("Record Updated Successfully")
+                clearEditTexts()
             }
 
         }.start()
@@ -257,9 +255,10 @@ class MainActivity : AppCompatActivity() {
     /**
      * A helper function to clear our editTexts
      */
-    private fun clearEditTexts(){
-        idText.text.clear()
-        nameText.text.clear()
-        emailText.text.clear()
+    private fun clearEditTexts() {
+        val editTextFields = listOf(idText, nameText, emailText)
+        for (editTextField in editTextFields) {
+            editTextField.text.clear()
+        }
     }
 }
