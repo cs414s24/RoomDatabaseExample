@@ -123,9 +123,12 @@ class MainActivity : AppCompatActivity() {
             return
         }
 
-        // This is probably not the best approach as it uses Main thread
+        // "Dispatchers.Main" specifies that coroutines launched within this scope will run on
+        // the main thread (the UI thread). This is important for updating the UI as any code running
+        // on the main thread can directly modify UI elements.
+        // CoroutineName("MyScope") assigns a name, "MyScope", to the coroutine scope. This name is
+        // mainly for debugging purposes to identify the scope in logs or coroutine stack traces.
         CoroutineScope(Dispatchers.Main + CoroutineName("MyScope")).launch {
-
             val contact  = ContactEntity(0,name, email)
             Log.d(TAG, "Inserting a contact...")
             db.contactDAO().insertContact(contact)

@@ -15,8 +15,10 @@ interface ContactDAO {
 
 
     // Enable this version if you want to use Coroutine version instead of Thread (alternative to the method above)
+    // suspend keyword must be included in the beginning, which indicates that the function can pause its execution
+    // and wait for some asynchronous operation to complete before resuming.
 /*    @Insert(onConflict = OnConflictStrategy.REPLACE)
-    fun insertContact(contact: ContactEntity)*/
+    suspend fun insertContact(contact: ContactEntity)*/
 
     // Updates the contact
     @Update
